@@ -1,1 +1,4 @@
 /target
+/weights
+/weights/yolov7.pt
+weights/yolov7.pt
