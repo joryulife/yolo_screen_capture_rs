@@ -41,8 +41,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let height = capturer.height();
         let buffer: Vec<u8> = frame.to_vec();
         let image: RgbImage = ImageBuffer::from_raw(width as u32, height as u32, buffer).unwrap();
-        let resized_image = vision::image::resize(&image, 640, 640, vision::image::ResizeMethod::Bicubic)?;
-        let input_tensor = vision::image::into_tensor(&resized_image)?.unsqueeze(0).to_device(device);
+        
+        // 画像をテンソルに変換
+        let image_tensor = vision::image::load_from_image(image)?.to_device(device);
+
+        // 前処理: 画像をリサイズ
+        let resized_image = vision::image::resize(&image_tensor, 640, 640);
+
+        let input_tensor = resized_image.unsqueeze(0);
 
         // 推論を実行
         let output = no_grad(|| yolo7.forward(&input_tensor))?;
