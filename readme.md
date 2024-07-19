@@ -16,7 +16,8 @@ Invoke-WebRequest -Uri "https://github.com/WongKinYiu/yolov7/releases/download/v
 ```
 
 3. libtorchのダウンロード
-(公式)[https://pytorch.org/]からC++/javaのものをダウンロード
+
+[公式](https://pytorch.org/)からC++/javaのものをダウンロード
 
 4. 環境変数の設定
 ダウンロードしたlibtorchのパスを環境変数に設定します。
